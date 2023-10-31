@@ -15,7 +15,6 @@ if($email == '' || $password == '' ) {
   $passwords = array();
   $fNames = array();
   $lNames = array();
-  $ages = array();
 
   while($line = fgets($fn)) {
     //echo $line.'<br>';
@@ -29,26 +28,22 @@ if($email == '' || $password == '' ) {
     array_push($lNames, $values[2]);
     array_push($emails, $values[3]);
     array_push($passwords, $values[4]);
-    array_push($ages, $values[5]);
   }
   fclose($fn);
 
-  // print_r($roles);
+  // print_r($role);
   // echo '<br>';
-  // print_r($emails);
+  // print_r($email);
   // echo '<br>';
-  // print_r($passwords);
+  // print_r($password);
 
   $count = count($roles);
-  for($i=0;$i<$count;$i++){
-    // if($roles[$i]=='user'){
-    if(1){
-      echo "$emails[$i] == $email && $passwords[$i] == $password";
+  for($i=1;$i<$count;$i++){
+    if($roles[$i]=='user'){
     if($emails[$i] == $email && $passwords[$i] == $password){
       $successMessage = 'Login Successfully';
       $_SESSION['email'] = $email;
       $_SESSION['role'] = $roles[$i];
-      $_SESSION['age'] = $ages[$i];
       $_SESSION['fullName'] = $fNames[$i].' '.$lNames[$i];
       header("Location: index.php");
     }
@@ -58,7 +53,7 @@ if($email == '' || $password == '' ) {
   }
   else
   {
-    $errorMessage = 'This is not a user';
+    $errorMessage = 'Invalid Email or Password';
   }
   }
 
